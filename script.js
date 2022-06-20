@@ -1,11 +1,34 @@
-const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//Change textarea background color based on time
+var checkTime = function () {
 
-var date = new Date();
-var year = date.getFullYear();
-var month = months[date.getMonth()];
-var day = date.getDate();
-var weekday = weekdays[date.getDay()];
-var currentDay = document.getElementById("currentDay");
+    //Get Current time
+    var currentTime = moment().format('H');
 
-currentDay.innerHTML = weekday + "," + month + day + year;
+    //get all elements with class "taskarea"
+    var timeBlockElements = $(".textarea");
+
+    //loop through taskarea classes
+    for (var i = 0 ; i < timeBlockElements.length ; i++) {
+
+        //Get element i's ID as a string
+        var elementID = timeBlockElements[i].id;
+
+        //get element by ID
+        var manipID = document.getElementById(timeBlockElements[i].id)
+
+        //remove any old classes from element
+        $(timeBlockElements[i].id).removeClass(".present .past .future");
+
+        // apply new class if task is present/past/future
+        if (elementID < currentTime) {
+            $(manipID).addClass("past");
+        } else if (elementID > currentTime) {
+            $(manipID).addClass("future");
+        } else {
+            $(manipID).addClass("present");
+        }
+    }
+}
+
+// checkTime every 5 minutes
+setInterval(checkTime(), (1000 * 60) * 5);
