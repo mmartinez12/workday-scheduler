@@ -1,8 +1,11 @@
+var events = {};
+
 //Change textarea background color based on time
-var checkTime = function () {
+function checkTime() {
 
     //Get Current time
-    var currentTime = moment().format('H');
+    var date = new Date();
+    var currentTime = date.getHours();
 
     //get all elements with class "taskarea"
     var timeBlockElements = $(".textarea");
@@ -32,3 +35,44 @@ var checkTime = function () {
 
 // checkTime every 5 minutes
 setInterval(checkTime(), (1000 * 60) * 5);
+
+var loadEvents = function() {
+    events = JSON.parse(localStorage.getItem("events"));
+  
+    // if nothing in localStorage, create a new object to track all event status arrays
+    if (!events) {
+      events = {
+        nine: [],
+        ten: [],
+        eleven: [],
+        twelve: [],
+        one: [],
+        two: [],
+        three: [],
+        four: [],
+        five: [],
+      };
+    }}
+
+var saveEvents = function() {
+    localStorage.setItem("events", JSON.stringify(events));
+};
+
+// save button in modal was clicked
+$("#row .saveBtn").click(function() {
+    // get form values
+    var eventText = $(".textarea").val();
+    var eventTime = $("#modalDueDate").val();
+  
+    if (taskText && taskDate) {
+      createTask(taskText, taskDate, "toDo");
+  
+      // save in events array
+      events.toDo.push({
+        text: eventText,
+        time: eventTime
+      });
+  
+      saveEvents();
+    }
+  });
