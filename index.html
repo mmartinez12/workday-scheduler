@@ -26,7 +26,17 @@
     <header class="jumbotron">
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
-      <p id="currentDay" class="lead"></p>
+      <p id="currentDay" class="lead">
+       <script>
+          const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          var date = new Date();
+          var month = months[date.getMonth()];
+          var day = date.getDate();
+          var weekday = weekdays[date.getDay()];
+          document.getElementById("currentDay").innerHTML = weekday + ", " + month + " " + day;
+        </script>
+      </p>
     </header>
     <div class="container">
         <div id="row" class="d-flex flex-row">
@@ -78,5 +88,6 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="/script.js"></script>
   </body>
 </html>
