@@ -1,13 +1,4 @@
 var saveBtns = document.getElementsByClassName("saveBtn");
-var nine = document.getElementById("09");
-var ten = document.getElementById("10");
-var eleven = document.getElementById("11");
-var twelve = document.getElementById("12");
-var one = document.getElementById("13");
-var two = document.getElementById("14");
-var three = document.getElementById("15");
-var four = document.getElementById("16");
-var five = document.getElementById("17");
 
 //Change textarea background color based on time
 function checkTime() {
@@ -70,7 +61,5 @@ var loadEvents = function() {
         document.getElementById(hour).value = events[hour];
     }
 }
-
-//document.addEventListener('load', loadEvents);
 
 loadEvents();
