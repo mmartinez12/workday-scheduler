@@ -65,9 +65,12 @@ var loadEvents = function() {
     var events = JSON.parse(localStorage.getItem("events"));
 
     // populate the textareas
-    for (var i = 9; i <= 17; i++) {
-        document.getElementById(i).value = events[i];
+    for (var hour in events) {
+        if (events[hour]) // check if value is not null
+        document.getElementById(hour).value = events[hour];
     }
 }
 
-document.addEventListener('load', loadEvents);
+//document.addEventListener('load', loadEvents);
+
+loadEvents();
