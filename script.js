@@ -1,4 +1,13 @@
-var events = {};
+var saveBtns = document.getElementsByClassName("saveBtn");
+var nine = document.getElementById("09");
+var ten = document.getElementById("10");
+var eleven = document.getElementById("11");
+var twelve = document.getElementById("12");
+var one = document.getElementById("13");
+var two = document.getElementById("14");
+var three = document.getElementById("15");
+var four = document.getElementById("16");
+var five = document.getElementById("17");
 
 //Change textarea background color based on time
 function checkTime() {
@@ -36,43 +45,49 @@ function checkTime() {
 // checkTime every 5 minutes
 setInterval(checkTime(), (1000 * 60) * 5);
 
+// save button was clicked
+for (var i = 0; i < saveBtns.length; i++){
+saveBtns[i].addEventListener("click", function(event) {
+    event.preventDefault();
+    // define event text array
+    var events = [
+        nine.value,
+        ten.value,
+        eleven.value,
+        twelve.value,
+        one.value,
+        two.value,
+        three.value,
+        four.value,
+        five.value
+    ];
+    //save events to localStorage
+    localStorage.setItem("events", JSON.stringify(events));
+    console.log(localStorage);
+})};
+
+// load saved user input on refresh
 var loadEvents = function() {
     events = JSON.parse(localStorage.getItem("events"));
-  
-    // if nothing in localStorage, create a new object to track all event status arrays
-    if (!events) {
-      events = {
-        nine: [],
-        ten: [],
-        eleven: [],
-        twelve: [],
-        one: [],
-        two: [],
-        three: [],
-        four: [],
-        five: [],
-      };
-    }}
 
-var saveEvents = function() {
-    localStorage.setItem("events", JSON.stringify(events));
-};
+    nine.value = nine.value;
+ten.value = ten.value;
+eleven.value = eleven.value;
+twelve.value = twelve.value;
+one.value = one.value;
+two.value = two.value;
+three.value = three.value;
+four.value = four.value;
+five.value = five.value;
 
-// save button in modal was clicked
-$("#row .saveBtn").click(function() {
-    // get form values
-    var eventText = $(".textarea").val();
-    var eventTime = $("#modalDueDate").val();
-  
-    if (taskText && taskDate) {
-      createTask(taskText, taskDate, "toDo");
-  
-      // save in events array
-      events.toDo.push({
-        text: eventText,
-        time: eventTime
-      });
-  
-      saveEvents();
-    }
-  });
+    // $('.textarea').each(function() {
+    //     $(this).val(localStorage.getItem("events"));
+    // });
+}
+
+
+
+
+
+
+console.log(localStorage);
