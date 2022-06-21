@@ -50,17 +50,11 @@ for (var i = 0; i < saveBtns.length; i++){
 saveBtns[i].addEventListener("click", function(event) {
     event.preventDefault();
     // define event text array
-    var events = [
-        nine.value,
-        ten.value,
-        eleven.value,
-        twelve.value,
-        one.value,
-        two.value,
-        three.value,
-        four.value,
-        five.value
-    ];
+    var events = [];
+    for (var i = 9; i <= 17; i++) {
+        events[i] = document.getElementById(i).value;
+    }
+
     //save events to localStorage
     localStorage.setItem("events", JSON.stringify(events));
     console.log(localStorage);
@@ -68,26 +62,12 @@ saveBtns[i].addEventListener("click", function(event) {
 
 // load saved user input on refresh
 var loadEvents = function() {
-    events = JSON.parse(localStorage.getItem("events"));
+    var events = JSON.parse(localStorage.getItem("events"));
 
-    nine.value = nine.value;
-ten.value = ten.value;
-eleven.value = eleven.value;
-twelve.value = twelve.value;
-one.value = one.value;
-two.value = two.value;
-three.value = three.value;
-four.value = four.value;
-five.value = five.value;
-
-    // $('.textarea').each(function() {
-    //     $(this).val(localStorage.getItem("events"));
-    // });
+    // populate the textareas
+    for (var i = 9; i <= 17; i++) {
+        document.getElementById(i).value = events[i];
+    }
 }
 
-
-
-
-
-
-console.log(localStorage);
+document.addEventListener('load', loadEvents);
